@@ -1,0 +1,6 @@
+1.) https://github.com/ThomasLech/CROHME_extractor
+2. ) https://github.com/RobinXL/inkml2img
+
+git pull for both
+some pip installs needed (matplotlib, opencv, etc...)
+Issues with some subfolders being zipped in (1.)- particularly in 2011 dataset
