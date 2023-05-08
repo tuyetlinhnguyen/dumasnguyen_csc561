@@ -4,24 +4,12 @@ import pandas as pd
 import tensorflow as tf
 
 # image readers/processors
-import cv2
 from PIL import Image
 from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator
 
-### GLOBAL VARIABLES
+from global_ import IMAGE_SIZE, TRAIN_LST_PATH, VAL_LST_PATH, TEST_LST_PATH, FORMULAS_LST_PATH, IMAGE_PATH, BATCH_SIZE
 
-# INPUT IMAGE STANDARD SIZE
-IMG_HEIGHT = 100
-IMG_WIDTH = 275
-IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
-
-# absolute file paths
-TRAIN_LST_PATH = '/Users/tuyet/Documents/S23/CSC 561/Final Project/Final/dumasnguyen_csc561/im2latex/data/im2latex_train.lst'
-VAL_LST_PATH = '/Users/tuyet/Documents/S23/CSC 561/Final Project/Final/dumasnguyen_csc561/im2latex/data/im2latex_validate.lst'
-TEST_LST_PATH = '/Users/tuyet/Documents/S23/CSC 561/Final Project/Final/dumasnguyen_csc561/im2latex/data/im2latex_test.lst'
-FORMULAS_LST_PATH = '/Users/tuyet/Documents/S23/CSC 561/Final Project/Final/dumasnguyen_csc561/im2latex/data/im2latex_formulas.lst'
-IMAGE_PATH = '/Users/tuyet/Documents/S23/CSC 561/Final Project/Final/dumasnguyen_csc561/im2latex/data/formula_images/'
 
 def create_df_from_data_lst(lst_file, formulas_list):
     """
@@ -50,7 +38,7 @@ def create_df_from_data_lst(lst_file, formulas_list):
         for line in file:
             idx, img, rend = line.strip().split(' ')
             data['formulas_idx'].append(int(idx))
-            data['image'].append(IMAGE_PATH+img+'.png')
+            data['image'].append(IMAGE_PATH+img+'.jpg')
             data['render_type'].append(rend)
             data['latex'] = formulas_list[int(idx)]
 
@@ -100,8 +88,9 @@ def get_dataloaders():
     val_df = create_df_from_data_lst(VAL_LST_PATH, formulas)
     test_df = create_df_from_data_lst(TEST_LST_PATH, formulas)
 
-    for df in [train_df, val_df, test_df]:
-        print(df.head())
+    # for df in [train_df, val_df, test_df]:
+    #     print(df.head())
+    # print(train_df['latex'].head(10))
 
     # create dataloaders from dataframes
     train_datagen = ImageDataGenerator(rescale=1./255)
@@ -109,10 +98,10 @@ def get_dataloaders():
     test_datagen = ImageDataGenerator(rescale=1./255)
 
     train_dataloader = train_datagen.flow_from_dataframe(train_df, directory=IMAGE_PATH, x_col='image', y_col='latex',
-                                                        target_size=IMG_SIZE, batch_size=32)
+                                                        target_size=IMAGE_SIZE, batch_size=BATCH_SIZE, color_mode='grayscale')
     val_dataloader = val_datagen.flow_from_dataframe(val_df, directory=IMAGE_PATH,  x_col='image', y_col='latex',
-                                                    target_size=IMG_SIZE, batch_size=32)
+                                                    target_size=IMAGE_SIZE, batch_size=BATCH_SIZE, color_mode='grayscale')
     test_dataloader = test_datagen.flow_from_dataframe(test_df, directory=IMAGE_PATH,  x_col='image', y_col='latex',
-                                                    target_size=IMG_SIZE, batch_size=32)
+                                                    target_size=IMAGE_SIZE, batch_size=BATCH_SIZE, color_mode='grayscale')
     
     return train_dataloader, val_dataloader, test_dataloader
