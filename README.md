@@ -5,9 +5,9 @@ Given the complications with our proposed project dataset, our new goal was to c
 recognition task: training from scratch and transfer learning. We also explored architectures, comparing performances of a CNN-based and a Vision Transformer-based model.
 
 The final CNN model and results can be found in mnist_cnn.ipynb and the pre-trained ViT results can be found in mnist_vit.ipynb.
-
+<!-- 
 CROHME [here](https://uncloud.univ-nantes.fr/index.php/s/R9tWZSG3XeQbEeC).
 method to download (github, couldn't get to work) [here](https://github.com/vndee/offline-crohme)
 
 calculus jpeg images (kaggle) [here](https://www.kaggle.com/datasets/aidapearson/ocr-data/code)
-interesting notebook [here](https://www.kaggle.com/code/aidapearson/visualizing-ground-truth-jsons)
+interesting notebook [here](https://www.kaggle.com/code/aidapearson/visualizing-ground-truth-jsons) -->
