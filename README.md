@@ -11,3 +11,5 @@ method to download (github, couldn't get to work) [here](https://github.com/vnde
 
 calculus jpeg images (kaggle) [here](https://www.kaggle.com/datasets/aidapearson/ocr-data/code)
 interesting notebook [here](https://www.kaggle.com/code/aidapearson/visualizing-ground-truth-jsons) -->
+
+Prior work using the im2latex dataset are found under the corresponding directory.
